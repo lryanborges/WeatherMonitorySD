@@ -21,6 +21,9 @@ public class MainServer {
     private static final String CLIENTS_CONN = "clientsConnection";
 
     public static void main(String[] args) throws Exception {
+
+        System.out.println("Server 1 iniciado.");
+
         ConnectionFactory factory = new ConnectionFactory();
         factory.setHost("localhost");
 

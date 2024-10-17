@@ -31,7 +31,7 @@ public class Server {
 
         channel.exchangeDeclare(MAINSERVER_CONN, "direct");
 
-        // Cria uma fila temporária e vincula à exchange com a chave "pressao"
+        // criar uma fila temporária p vincular à exchange com a chave dos servers
         String temporaryQueue = channel.queueDeclare().getQueue();
         channel.queueBind(temporaryQueue, MAINSERVER_CONN, serverKey);
 
@@ -50,13 +50,13 @@ public class Server {
 
             } finally {
                 System.out.println("------------------------------------------");
-                // Consome as mensagens da fila vinculada
+                // faz o reconhecimento das mensagens da fila vinculada
                 channel.basicAck(environmentRead.getEnvelope().getDeliveryTag(), false); // tira da fila do RabbitMQ
             }
 
         };
 
-        // Consome as mensagens da fila vinculada
+        // consome as mensagens da fila vinculada
         channel.basicConsume(temporaryQueue, false, callbackEntrega, consumerTag -> { });
 
     }
